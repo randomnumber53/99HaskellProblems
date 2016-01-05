@@ -18,9 +18,13 @@ myButLast (_:xs) = myButLast xs
 elementAt :: (Integral a) => [b] -> a -> b
 elementAt (x:_) 1 = x
 elementAt (_:xs) n = elementAt xs (n - 1)
+-- Not sure how this works if n <= 0
 
 -- Problem 4 --
 
+myLength :: (Integral b) => [a] -> b
+myLength [] = 0
+myLength (_:xs) = 1 + myLength xs
 
 -- Problem 5 --
 
