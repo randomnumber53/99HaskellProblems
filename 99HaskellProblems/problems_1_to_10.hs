@@ -16,6 +16,7 @@ myButLast (_:xs) = myButLast xs
 -- Problem 3 --
 
 elementAt :: (Integral a) => [b] -> a -> b
+elementAt [] _ = error "Index out of range."
 elementAt (x:_) 1 = x
 elementAt (_:xs) n = elementAt xs (n - 1)
 -- Not sure how this works if n <= 0
