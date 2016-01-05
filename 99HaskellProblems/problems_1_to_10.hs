@@ -18,8 +18,9 @@ myButLast (_:xs) = myButLast xs
 elementAt :: (Integral a) => [b] -> a -> b
 elementAt [] _ = error "Index out of range."
 elementAt (x:_) 1 = x
-elementAt (_:xs) n = elementAt xs (n - 1)
--- Not sure how this works if n <= 0
+elementAt (_:xs) n
+    | n <  1 = error "Index must be >= 1."
+    | n >= 1 = elementAt xs (n - 1)
 
 -- Problem 4 --
 
@@ -29,12 +30,18 @@ myLength (_:xs) = 1 + myLength xs
 
 -- Problem 5 --
 
+myReverse :: [a] -> [a]
+myReverse [] = []
+myReverse (x:xs) = myReverse xs ++ [x]
 
 -- Problem 6 --
 
+isPalindrome :: (Eq a) => [a] -> Bool
+isPalindrome xs = (xs == reverse xs)
 
 -- Problem 7 --
 
+data NestedList a = Elem a | List [NestedList a]
 
 -- Problem 8 --
 
