@@ -1,3 +1,7 @@
+import Data.List
+import qualified Data.Map as Map
+import Geometry
+
 doubleMe x = x + x
 doubleUs x y = doubleMe x + doubleMe y
 
@@ -75,6 +79,13 @@ chain 1 = [1]
 chain n
     | even n = n:chain (n `div` 2)
     | odd n  = n:chain (3 * n + 1)
+
+-- Chapter 7 --
+
+numUniques :: (Eq a) => [a] -> Int
+numUniques = length . nub
+
+
 
 -- Project Euler #27 --
 

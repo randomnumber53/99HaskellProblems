@@ -24,7 +24,7 @@ elementAt (_:xs) n
 
 -- Problem 4 --
 
-myLength :: (Integral b) => [a] -> b
+myLength :: (Num b) => [a] -> b
 myLength [] = 0
 myLength (_:xs) = 1 + myLength xs
 
