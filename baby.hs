@@ -141,3 +141,8 @@ binSearch s y@(x:xs)
             | y !! half < s = binSearch s (drop half y)
             | otherwise = True
             where half = length y `quot` 2
+
+test = let a = 3
+           b = 2
+           c = a + b
+           in c*10

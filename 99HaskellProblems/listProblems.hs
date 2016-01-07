@@ -1,3 +1,5 @@
+import Data.List
+
 -- Problem 1 --
 
 myLast :: [a] -> a
@@ -138,29 +140,53 @@ removeAt index xs = (xs !! (index-1),
 
 -- Problem 21 --
 
+insertAt :: a -> [a] -> Int -> [a]
+insertAt e xs index = let [first, last] = split xs (index-1)
+                      in first ++ e:last
 
 -- Problem 22 --
 
+range a b = [a..b]
 
 -- Problem 23 --
 
+-- Skipped, will learn how to do radomness in Haskell later
 
 -- Problem 24 --
 
+-- Skipped, will learn how to do radomness in Haskell later
 
 -- Problem 25 --
 
+-- Skipped, will learn how to do radomness in Haskell later
 
 -- Problem 26 --
 
+combinations :: Int -> [a] -> [[a]]
+combinations 0 _ = [[]]
+combinations n xs
+    | length xs <  n = [[]]
+    | length xs == n = [xs]
+    | otherwise      = let loseIt = combinations n (tail xs) 
+                           useIt  = map ((head xs):)
+                                        (combinations (n-1) (tail xs))
+                       in useIt ++ loseIt
 
 -- Problem 27 --
+
+giveGroups :: (Eq a) => [Int] -> [a] -> [[[a]]]
+giveGroups [] [] = [[[]]]
+giveGroups [n] choices = if length choices == n
+                         then [[choices]]
+                         else error "Group sizes don't work."
+giveGroups (x:xs) choices =
+    let starts = combinations x choices
+        combos = [(used, (choices \\ used)) | used <- starts]
+    in concat [(map ([start] ++ ) (giveGroups xs left)) |
+               (start, left) <- combos]
 
 
 -- Problem 28 --
 
-
--- Problem 29 --
-
-
--- Problem 30 --
+lsort :: [[a]] -> [[a]]
+lsort xs = sortBy (\x y -> length x `compare` length y) xs
