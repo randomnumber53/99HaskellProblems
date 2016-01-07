@@ -41,12 +41,28 @@ isPalindrome xs = (xs == reverse xs)
 
 -- Problem 7 --
 
-data NestedList a = Elem a | List [NestedList a]
+data NestedList a = Elem a
+                  | List [NestedList a]
+                  deriving (Show, Read)
+
+flatten :: NestedList a -> [a]
+flatten (List []) = []
+flatten (Elem a) = [a]
+flatten (List (x:xs)) = flatten x ++ flatten (List xs)
 
 -- Problem 8 --
 
+compress :: (Eq a) => [a] -> [a]
+compress [] = []
+compress (x:xs) = x:compress (dropWhile (== x) xs)
 
 -- Problem 9 --
 
+pack :: (Eq a) => [a] -> [[a]]
+pack [] = []
+pack all@(x:xs) = (takeWhile (== x) all) : pack (dropWhile (== x) xs)
 
 -- Problem 10 --
+
+encode :: (Eq a) => [a] -> [(Int, a)]
+encode xs = map (\xs -> (length xs, head xs)) $ pack xs
