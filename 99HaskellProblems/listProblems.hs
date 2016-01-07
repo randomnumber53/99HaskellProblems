@@ -112,15 +112,29 @@ dropEvery xs n
 
 -- Problem 17 --
 
+split :: [a] -> Int -> [[a]]
+split xs n = [take n xs] ++ [drop n xs]
 
 -- Problem 18 --
 
+-- slice is inclusive --
+slice :: [a] -> Int -> Int -> [a]
+slice xs a b
+    | b >= a    = take (b-a+1) $ drop (a-1) xs
+    | otherwise = error "Not a valid slice."
 
 -- Problem 19 --
 
+rotate :: [a] -> Int -> [a]
+rotate xs n = let bottom = n `mod` (length xs) + (length xs) + 1
+                  top = bottom + (length xs) - 1
+              in slice (cycle xs) bottom top
 
 -- Problem 20 --
 
+removeAt :: Int -> [a] -> (a, [a])
+removeAt index xs = (xs !! (index-1),
+                     take (index-1) xs ++ drop index xs)
 
 -- Problem 21 --
 
